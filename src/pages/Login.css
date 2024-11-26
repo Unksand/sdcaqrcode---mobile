@@ -1,0 +1,35 @@
+.login-card {
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-card ion-card-header {
+    text-align: center;
+}
+
+.login-card ion-card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+ion-item {
+    margin-bottom: 15px;
+}
+ion-input{
+    margin-top: 20px;
+}
+/* ion-icon {
+    color: #007BFF; /* Change this color to match your theme */
+
+
+/* ion-button {
+    background-color: #007BFF; /* Change this color to match your theme */
+    /* color: white;
+    font-weight: bold;*/ 
+
+
+
+ion-button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
