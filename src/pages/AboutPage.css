@@ -1,5 +1,5 @@
-Banner Styles
-.banner {
+
+  .banner {
     background: url("https://storage.googleapis.com/bukas-website-v3-prd/website_v3/images/Bukas_x_SDCA_Article_Image.original.png") no-repeat center center;
     background-size: cover;
     height: 250px;
@@ -7,6 +7,7 @@ Banner Styles
   }
   
   .banner-overlay {
+    
     background: rgba(0, 0, 0, 0.5);
     height: 100%;
     display: flex;

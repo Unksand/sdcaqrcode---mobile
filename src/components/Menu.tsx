@@ -36,19 +36,19 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Contact Us',
-    url: '/contact',
+    url: '/folder/contact',
     iosIcon: callOutline,
     mdIcon: callSharp
   },
   {
     title: 'Services',
-    url: '/services',
+    url: '/folder/services',
     iosIcon: buildOutline,
     mdIcon: buildSharp
   },
   {
     title: 'Government Services',
-    url: '/government-services',
+    url: '/folder/Government',
     iosIcon: businessOutline,
     mdIcon: businessSharp
   },
@@ -74,7 +74,7 @@ const Menu: React.FC = () => {
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>Menu</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          {/* <IonNote>hi@ionicframework.com</IonNote> */}
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>

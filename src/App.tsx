@@ -10,6 +10,10 @@ import Home from './pages/Home';
 import Return from './pages/Return';
 import LoginPage from './pages/Login';
 import AboutPage from './pages/AboutPage';
+import Government from './pages/Goverment';
+import Services from './pages/Services';
+import Contact from './pages/Contact';
+import LoginAdmin from './pages/LoginAdmin';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -42,6 +46,8 @@ import './theme/variables.css';
 
 
 
+
+
 setupIonicReact();
 
 const App: React.FC = () => {
@@ -51,7 +57,11 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Route path="/folder/LoginPage" exact>
             <LoginPage />
+            
           </Route>
+          <Route path="/folder/LoginAdmin" exact>
+              <LoginAdmin />
+            </Route>
           
           
           
@@ -66,24 +76,25 @@ const App: React.FC = () => {
              <Route path="/folder/About" exact>
               <AboutPage />
             </Route>
-            {/* <Route path="/folder/Resources" exact>
+             {/* <Route path="/folder/Resources" exact>
               <ResourcesPage />
-            </Route>
-            <Route path="/folder/Contact Us" exact>
-              <ContactPage />
+            </Route> */}
+            <Route path="/folder/Contact" exact>
+              <Contact/>
             </Route>
             <Route path="/folder/Services" exact>
-              <ServicesPage />
-            </Route> */}  
-            {/* <Route path="/folder/Government" exact>
-              <Borrow />
-            </Route> */}
+              <Services />
+            </Route>
+            <Route path="/folder/Government" exact>
+              <Government />
+            </Route>
             <Route path="/folder/Borrow" exact>
               <Borrow />
             </Route>
             <Route path="/folder/Return" exact>
               <Return />
             </Route>
+
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

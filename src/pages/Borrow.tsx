@@ -6,13 +6,13 @@ const Borrow: React.FC = () => {
     const history = useHistory();
 
     const handleLoginRedirect = () => {
-        history.push('/login'); // Change this to your actual login route
+        history.push('/folder/LoginPage'); // Change this to your actual login route
     };
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
+            <IonHeader >
+                <IonToolbar style={{color: 'danger'}}>
                     <IonButtons slot="start">
                         <IonMenuButton />
                     </IonButtons>
@@ -28,7 +28,7 @@ const Borrow: React.FC = () => {
                 </IonHeader>
                 <IonContent className="ion-padding">
                     <IonText>
-                        <h2>You need to Login to Return the Book</h2>
+                        <h2>You need to Login to Borrow the Book</h2>
                     </IonText>
                     <IonButton expand="full" onClick={handleLoginRedirect}>
                         Go to Login
