@@ -28,15 +28,19 @@ const Login = () => {
         console.log('Password:', password);
     };
 
+    const handleAdminAction = () => {
+        // Handle the action for the admin button here
+        console.log('Admin button clicked');
+        // You can redirect or perform any other action
+    };
+
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <div style={{textAlign: 'center', color: 'Red '}}>
-                        <IonTitle >Student Login</IonTitle>
-
+                    <div style={{ textAlign: 'center', color: 'Red' }}>
+                        <IonTitle>Student Login</IonTitle>
                     </div>
-                    
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">
@@ -50,7 +54,7 @@ const Login = () => {
                             <IonLabel position="floating">Student Number</IonLabel>
                             <IonInput
                                 value={studentNumber}
-                                // onIonChange={e => setStudentNumber(e.target.value)} // Fallback to empty string
+                                onIonChange={e => setStudentNumber(e.detail.value!)} // Update the state on change
                                 required
                             />
                         </IonItem>
@@ -60,13 +64,25 @@ const Login = () => {
                             <IonInput
                                 type="password"
                                 value={password}
-                                // onIonChange={e => setPassword(e.target.value)} // Fallback to empty string
+                                onIonChange={e => setPassword(e.detail.value!)} // Update the state on change
                                 required
                             />
                         </IonItem>
                         <IonButton expand="full" onClick={handleLogin}>
                             Login
                         </IonButton>
+
+                        <div>
+                        {/* Admin Action Button */}
+                        <IonButton expand="full" color="secondary" onClick={handleAdminAction} style={{ marginTop: '10px' }}>
+                            Admin Login
+                        </IonButton>
+                        
+                        <IonLabel style={{textcolor: 'Black'}}>If You are admin please click admin button</IonLabel>
+
+                        </div>
+                        
+                       
                     </IonCardContent>
                 </IonCard>
             </IonContent>
