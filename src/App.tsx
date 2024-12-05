@@ -14,6 +14,10 @@ import Government from './pages/Goverment';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import LoginAdmin from './pages/LoginAdmin';
+import Homes from './pages/Homes';
+import Scanner from './pages/Scanner';
+
+
 // import QrCode from './pages/QrCode';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -66,12 +70,15 @@ const App: React.FC = () => {
             {/* <Route path="/folder/QrCode" exact>
               <QrCode />
             </Route> */}
-          
+          <Route path="/folder/Homes" component={Homes} exact={true} />
+         <Route path="/folder/Scanner" component={Scanner} exact={true} />
+         <Route exact path="/" render={() => <Redirect to="/home" />} />
           
           
           
           <Menu />
           <IonRouterOutlet id="main">
+          
             <Route path="/" exact>
               <Home />
             </Route>
