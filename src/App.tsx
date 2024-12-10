@@ -3,7 +3,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 
-
+import Borrow2 from './pages/Borrow2';
 import Page from './pages/Page';
 import Borrow from './pages/Borrow';
 import Home from './pages/Home';
@@ -60,10 +60,7 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonSplitPane contentId="main">
-          <Route path="/folder/LoginPage" exact>
-            <LoginPage />
-            
-          </Route>
+          
           <Route path="/folder/LoginAdmin" exact>
               <LoginAdmin />
             </Route>
@@ -72,7 +69,7 @@ const App: React.FC = () => {
             </Route> */}
           <Route path="/folder/Homes" component={Homes} exact={true} />
          <Route path="/folder/Scanner" component={Scanner} exact={true} />
-         <Route exact path="/" render={() => <Redirect to="/home" />} />
+         <Route exact path="/" render={() => <Redirect to="/folder/Home" />} />
           
           
           
@@ -106,7 +103,14 @@ const App: React.FC = () => {
             <Route path="/folder/Return" exact>
               <Return />
             </Route>
-
+            <Route path="/folder/LoginPage" exact>
+            <LoginPage />
+            
+            </Route>
+            
+            <Route path="/folder/Borrow2" component={Borrow2} exact={true} />
+            
+            
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

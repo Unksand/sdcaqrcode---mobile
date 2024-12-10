@@ -1,4 +1,4 @@
-import { IonButton, IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCheckbox, IonContent, IonHeader, IonItem, IonLabel, IonList, IonListHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
 import { useEffect, useRef, useState } from 'react';
 import { DBR, TextResult } from 'capacitor-plugin-dynamsoft-barcode-reader';
@@ -38,7 +38,7 @@ const Homes = (props:RouteComponentProps) => {
 
   const startScan = () => {
     if (licenseInitialized) {
-      props.history.push("scanner",{continuousScan:continuousScan})
+      props.history.push("scanner")
     }
   }
 
@@ -51,13 +51,16 @@ const Homes = (props:RouteComponentProps) => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+            <IonButtons slot="start">
+              <IonMenuButton/>
+            </IonButtons>
           <IonTitle>QR Code Scanner</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">QR Code Scanner</IonTitle>
+            <IonTitle size="large">For Scanning</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonButton expand="full" onClick={startScan}>{licenseInitialized?"Start Scanning":"Initializing..."}</IonButton>

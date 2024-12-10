@@ -8,10 +8,25 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
+  IonButton,
+  IonMenuButton,
 } from '@ionic/react';
-
-import { useLocation } from 'react-router-dom';
-import { homeOutline, homeSharp, informationCircleOutline, informationCircleSharp, callOutline, callSharp, buildOutline, buildSharp, businessOutline, businessSharp, bookOutline, bookSharp } from 'ionicons/icons';
+import { useLocation, useHistory } from 'react-router-dom';
+import {
+  homeOutline,
+  homeSharp,
+  informationCircleOutline,
+  informationCircleSharp,
+  callOutline,
+  callSharp,
+  buildOutline,
+  buildSharp,
+  businessOutline,
+  businessSharp,
+  bookOutline,
+  bookSharp,
+} from 'ionicons/icons';
+import { useState, useEffect } from 'react';
 import './Menu.css';
 
 interface AppPage {
@@ -26,79 +41,152 @@ const appPages: AppPage[] = [
     title: 'Home',
     url: '/folder/Home',
     iosIcon: homeOutline,
-    mdIcon: homeSharp
+    mdIcon: homeSharp,
   },
   {
     title: 'About',
     url: '/folder/About',
     iosIcon: informationCircleOutline,
-    mdIcon: informationCircleSharp
+    mdIcon: informationCircleSharp,
   },
   {
     title: 'Contact Us',
     url: '/folder/contact',
     iosIcon: callOutline,
-    mdIcon: callSharp
+    mdIcon: callSharp,
   },
   {
     title: 'Services',
     url: '/folder/services',
     iosIcon: buildOutline,
-    mdIcon: buildSharp
+    mdIcon: buildSharp,
   },
   {
     title: 'Government Services',
     url: '/folder/Government',
     iosIcon: businessOutline,
-    mdIcon: businessSharp
+    mdIcon: businessSharp,
   },
   {
     title: 'Borrow',
-    url: '/folder/Borrow', // Ensure this matches the route in App component
+    url: '/folder/Borrow',
     iosIcon: bookOutline,
-    mdIcon: bookSharp
+    mdIcon: bookSharp,
   },
   {
     title: 'Return',
-    url: '/folder/Return', // Ensure this matches the route in App component
+    url: '/folder/Return',
     iosIcon: bookOutline,
-    mdIcon: bookSharp
-  }
+    mdIcon: bookSharp,
+  },
 ];
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const history = useHistory();
+
+  const [isMenuDisabled, setIsMenuDisabled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control menu visibility on large screens
+
+  // Get the user's email or username from localStorage
+  const userEmail = localStorage.getItem('email'); // You can store this as 'username' or 'email' based on your app
+
+  // Logout function
+  const handleLogout = () => {
+    // Clear session data
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('logged_in');
+
+    // Redirect to login page
+    history.push('/folder/Home'); // Redirect to the Login Page after logout
+  };
+
+  // Update isMenuDisabled based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuDisabled(true); // Disable menu on large screens
+      } else {
+        setIsMenuDisabled(false); // Enable menu on small screens
+      }
+    };
+
+    // Add resize event listener
+    window.addEventListener('resize', handleResize);
+
+    // Call handleResize initially to check the current screen size
+    handleResize();
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Function to toggle the menu on larger screens
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <IonMenu contentId="main" type="overlay">
-      <IonContent>
-        <IonList id="inbox-list">
-          <IonListHeader>Menu</IonListHeader>
-          {/* <IonNote>hi@ionicframework.com</IonNote> */}
-          {appPages.map((appPage, index) => {
-            return (
-              <IonMenuToggle key={index} autoHide={false}>
-                <IonItem
-                  className={location.pathname === appPage.url ? 'selected' : ''}
-                  routerLink={appPage.url}
-                  routerDirection="none"
-                  lines="none"
-                  detail={false}
-                >
-                  <IonIcon
-                    aria-hidden="true"
-                    slot="start"
-                    ios={appPage.iosIcon}
-                    md={appPage.mdIcon}
-                  />
-                  <IonLabel>{appPage.title}</IonLabel>
+    <>
+      {/* Button to toggle the menu on larger screens */}
+      {isMenuDisabled && (
+        <IonButton onClick={toggleMenu}  className="menu-toggle-button">
+          <IonMenuButton/>  
+        </IonButton>
+      )}
+
+      {/* IonMenu with the disabled prop */}
+      <IonMenu contentId="main" type="overlay" swipeGesture={false} disabled={!isMenuOpen && isMenuDisabled}>
+        <IonContent>
+          <IonList id="inbox-list">
+            <IonListHeader>Menu</IonListHeader>
+
+            {/* Display the logged-in user's email */}
+            {userEmail ? (
+              <IonNote>Welcome, {userEmail}</IonNote>
+            ) : (
+              <IonNote>Welcome, Guest</IonNote>
+            )}
+
+            {/* Map over the appPages array to display menu items */}
+            {appPages.map((appPage, index) => {
+              return (
+                <IonMenuToggle key={index} autoHide={false}>
+                  <IonItem
+                    className={location.pathname === appPage.url ? 'selected' : ''}
+                    routerLink={appPage.url}
+                    routerDirection="none"
+                    lines="none"
+                    detail={false}
+                  >
+                    <IonIcon
+                      aria-hidden="true"
+                      slot="start"
+                      ios={appPage.iosIcon}
+                      md={appPage.mdIcon}
+                    />
+                    <IonLabel>{appPage.title}</IonLabel>
+                  </IonItem>
+                </IonMenuToggle>
+              );
+            })}
+
+            {/* Logout Button */}
+            {userEmail && (
+              <IonMenuToggle autoHide={false}>
+                <IonItem button onClick={handleLogout}>
+                  <IonLabel>Logout</IonLabel>
                 </IonItem>
               </IonMenuToggle>
-            );
-          })}
-        </IonList>
-      </IonContent>
-    </IonMenu>
+            )}
+          </IonList>
+        </IonContent>
+      </IonMenu>
+    </>
   );
 };
 
