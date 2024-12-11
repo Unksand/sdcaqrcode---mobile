@@ -32,8 +32,8 @@ const Login = () => {
     const handleLogin = () => {
         $.ajax({
             // FOR WEBPAGE
-            // url: "http://localhost/SDCAQrCode/index.php/Login",
-            url: "http://192.168.120.107/SDCAQrCode/index.php/Login",
+            url: "http://localhost/SDCAQrCode/index.php/Login",
+            // url: "http://192.168.120.124/SDCAQrCode/index.php/Login",
             method: "POST",
             data: {
                 email: email,

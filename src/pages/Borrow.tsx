@@ -20,8 +20,8 @@ const Borrow: React.FC = () => {
     const loggedIn = localStorage.getItem('logged_in');
     if (loggedIn === 'true') {
       // If user is logged in, reload the page to initiate the other function
-      if (history.location.pathname !== '/folder/homes') {
-        history.replace('/folder/homes');
+      if (history.location.pathname !== '/folder/Borrow2') {
+        history.replace('/folder/Borrow2');
         // Reload the page after navigation
         window.location.reload();
       }

@@ -4,7 +4,6 @@ import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonRow, IonCol, Io
 import { RouteComponentProps } from 'react-router-dom';
 import { DBR, TextResult } from 'capacitor-plugin-dynamsoft-barcode-reader';
 
-// Define the Book interface
 interface Book {
   id: number;
   book_title: string;
@@ -16,8 +15,7 @@ const Borrow2 = (props: RouteComponentProps) => {
   const [books, setBooks] = useState<Book[]>([]); // State for the list of books
   const [borrowedBooks, setBorrowedBooks] = useState([]); // State for borrowed books
   const [loading, setLoading] = useState(false); // State for loading status
-
-  const [barcodeResults, setBarcodeResults] = useState([] as TextResult[]);
+  const [scannedQRs, setScannedQRs] = useState<string[]>([]); // State to store scanned QR codes
   const [licenseInitialized, setLicenseInitialized] = useState(false);
   const initLicenseTried = useRef(false);
 
@@ -28,7 +26,6 @@ const Borrow2 = (props: RouteComponentProps) => {
       console.log('Fetching books with query:', searchQuery);
       const response = await fetch(`http://localhost/SDCAQrCode/index.php/Booksload/search_books?query=${searchQuery}`);
       const data = await response.json();
-      console.log('Books fetched:', data);  // Log the fetched books
       setBooks(data); // Update state with the fetched books
     } catch (error) {
       console.error('Error fetching books:', error); // Log the error
@@ -42,17 +39,14 @@ const Borrow2 = (props: RouteComponentProps) => {
       console.log('Attempting to borrow book with ID:', bookId);
       const response = await fetch(`http://localhost/SDCAQrCode/index.php/Booksload/borrow_book/${bookId}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
       });
       const data = await response.json();
-      console.log('Borrow response:', data);  // Log the response after borrowing
-      alert(data.message); // Alert the user with the response message
-      fetchBooks(); // Re-fetch books to update the list
-      fetchBorrowedBooks(); // Re-fetch borrowed books list
+      alert(data.message);
+      fetchBooks();
+      fetchBorrowedBooks();
     } catch (error) {
-      console.error('Error borrowing book:', error); // Log the error
+      console.error('Error borrowing book:', error);
     }
   };
 
@@ -62,58 +56,93 @@ const Borrow2 = (props: RouteComponentProps) => {
       console.log('Fetching borrowed books...');
       const response = await fetch('http://localhost/SDCAQrCode/index.php/Booksload/borrowed_bookss');
       const data = await response.json();
-      console.log('Borrowed books fetched:', data);  // Log the fetched borrowed books
       setBorrowedBooks(data);
     } catch (error) {
-      console.error('Error fetching borrowed books:', error); // Log the error
+      console.error('Error fetching borrowed books:', error);
     }
   };
+
   const startScan = () => {
     if (licenseInitialized) {
-      props.history.push("scanner")
+      props.history.push("scanner"); // Navigate to scanner page
     }
-  }
+  };
+
   // Handle search input change
   const handleSearchInput = (e: any) => {
     setSearchQuery(e.target.value);
   };
 
-  useEffect(() => {
-    console.log('Component mounted, fetching initial data...');
-    fetchBooks(); // Initial fetch of books
-    fetchBorrowedBooks(); // Initial fetch of borrowed books
-  }, []); // Run only once when the component mounts
+  // Add scanned QR code to the list
+  const handleScanResult = (results: TextResult[]) => {
+    console.log('Scan results received:', results); // Debugging the raw scan results
 
+    // Check if results are empty or undefined
+    if (!results || results.length === 0) {
+      console.log('No scan results found.');
+      return;
+    }
+
+    // Extract the 'barcodeText' from each scan result
+    const scannedData = results.map((result, index) => {
+      console.log(`Result at index ${index}:`, result); // Debugging each result object
+
+      // Ensure the 'barcodeText' property exists in the result object and return it
+      if (result && result.barcodeText) {
+        console.log(`Extracted text from result at index ${index}: ${result.barcodeText}`);
+        return result.barcodeText; // Return the barcode text
+      } else {
+        console.log(`No 'barcodeText' property in result at index ${index}`);
+        return ''; // Return an empty string if no barcodeText found
+      }
+    }).filter(text => text); // Filter out any empty strings
+
+    console.log('Scanned data:', scannedData); // Debugging the scanned data
+    setScannedQRs(prevQRs => [...prevQRs, ...scannedData]); // Add the barcode text to the scanned QR list
+  };
+
+  // Remove scanned QR code from the list
+  const removeScannedQR = (index: number) => {
+    setScannedQRs(prevQRs => prevQRs.filter((_, i) => i !== index)); // Remove the QR code at the given index
+  };
+
+  // Initialize license for barcode scanning
   useEffect(() => {
     if (initLicenseTried.current === false) {
       initLicenseTried.current = true;
       const initLicense = async () => {
         try {
-          await DBR.initLicense({license:"DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNDM2OTU1LVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM0MzY5NTUiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOjI5NjAwNDU0NX0="})  
+          await DBR.initLicense({ license: "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNDM2OTU1LVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM0MzY5NTUiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOjI5NjAwNDU0NX0=" });
           setLicenseInitialized(true);
         } catch (error) {
           alert(error);
         }
-      }
+      };
       initLicense();
     }
-    initLicenseTried.current = true;
   }, []);
+
+  // Fetch initial data
+  useEffect(() => {
+    console.log('Component mounted, fetching initial data...');
+    fetchBooks();
+    fetchBorrowedBooks();
+  }, []);
+
+  // Handle scanned results (assuming DBR sends them via props.location.state)
   useEffect(() => {
     const state = props.location.state as { results?: TextResult[] };
-    console.log(state);
-    if (state) {
-      if (state.results) {
-        setBarcodeResults(state.results);
-        props.history.replace({ state: {} });
-      }
+    if (state && state.results) {
+      handleScanResult(state.results); // Handle the scan results properly
+      props.history.replace({ state: {} }); // Clear state after using it
     }
   }, [props.location.state]);
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <IonButtons slot="start">
+          <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
           <IonTitle>Borrow a Book</IonTitle>
@@ -126,15 +155,15 @@ const Borrow2 = (props: RouteComponentProps) => {
           <IonRow>
             <IonCol size="12">
               <IonSearchbar
+                color={'primary'}
                 value={searchQuery}
                 onIonInput={handleSearchInput}
                 debounce={500}
                 placeholder="Search for books..."
-                onIonClear={() => fetchBooks()}
+                onIonClear={() => fetchBooks()} // Reset search
               />
-              <IonButton onClick={fetchBooks}> search</IonButton>
+              <IonButton onClick={fetchBooks}>Search</IonButton>
             </IonCol>
-            
           </IonRow>
 
           {/* Available Books Section */}
@@ -160,8 +189,8 @@ const Borrow2 = (props: RouteComponentProps) => {
                   <IonCol size="12">
                     <IonItem>
                       <IonLabel>
-                        <h3>{book.book_title || 'No title available'}</h3>  {/* Book title */}
-                        <p>{book.Author || 'No author available'}</p>   {/* Book author */}
+                        <h3>{book.book_title || 'No title available'}</h3>
+                        <p>{book.Author || 'No author available'}</p>
                       </IonLabel>
                       <IonButton fill="outline" slot="end" onClick={() => borrowBook(book.id)}>
                         Borrow
@@ -174,21 +203,50 @@ const Borrow2 = (props: RouteComponentProps) => {
               <IonRow>
                 <IonCol size="12">
                   <IonItem>
-                    <IonLabel>No books available, Maybe is dosen't exist?</IonLabel>
+                    <IonLabel>No books available</IonLabel>
                   </IonItem>
                 </IonCol>
               </IonRow>
             )
           )}
-          <h3>QRCode Scanner</h3>
-          <IonButton expand="full" onClick={startScan}>{licenseInitialized?"Start Scanning":"Initializing..."}</IonButton>
+
+          {/* QR Code Scanner Section */}
+          <IonRow>
+            <IonCol size="12">
+              <h3>Scanned QR Codes</h3>
+              <ul style={{ padding: 0, listStyle: 'none' }}>
+                {scannedQRs.length > 0 ? (
+                  scannedQRs.map((qr, index) => (
+                    <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>{qr}</span> {/* Display the QR text */}
+                      <IonButton
+                        color="danger"
+                        fill="clear"
+                        size="small"
+                        onClick={() => removeScannedQR(index)}
+                      >
+                        Remove
+                      </IonButton>
+                    </li>
+                  ))
+                ) : (
+                  <li>No QR codes scanned yet</li>
+                )}
+              </ul>
+            </IonCol>
+          </IonRow>
+
+          {/* Start Scanning Button */}
+          <IonButton expand="full" onClick={startScan}>
+            {licenseInitialized ? "Start Scanning" : "Initializing..."}
+          </IonButton>
+
           {/* Borrowed Books Section */}
           <IonRow>
             <IonCol size="12">
               <h3>My Borrowed Books</h3>
               <ul style={{ padding: 0, listStyle: 'none' }}>
                 {borrowedBooks.length > 0 ? (
-                  
                   borrowedBooks.map((book) => (
                     <li key={book.id}>{book.book_title} by {book.Author}</li>
                   ))
@@ -198,7 +256,6 @@ const Borrow2 = (props: RouteComponentProps) => {
               </ul>
             </IonCol>
           </IonRow>
-          
         </IonGrid>
       </IonContent>
     </IonPage>
