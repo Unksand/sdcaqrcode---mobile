@@ -15,12 +15,14 @@ import {
     IonCardTitle,
     IonIcon,
     IonAlert,
+    IonGrid,
+    IonCol,
+    IonRow,
 } from '@ionic/react';
 import { personCircleOutline, lockClosedOutline } from 'ionicons/icons';
-import './Login.css'; // Make sure to create this CSS file for additional styles
+import './Login.css'; // Updated CSS file
 import $ from 'jquery';
 import { useHistory } from 'react-router-dom';
-import { toBeDisabled } from '@testing-library/jest-dom/matchers';
 
 const Login = () => {
     const [email, setEmail] = useState<string>('');
@@ -30,27 +32,30 @@ const Login = () => {
     const history = useHistory();
 
     const handleLogin = () => {
+        // Email Validation: Must end with @sdca.edu.ph
+        const sdcaEmailRegex = /^[a-zA-Z0-9._%+-]+@sdca\.edu\.ph$/;
+        if (!sdcaEmailRegex.test(email)) {
+            setAlertMessage('Please use a valid @sdca.edu.ph email address.');
+            setShowAlert(true);
+            return; // Stop further execution if email is invalid
+        }
+
+        // Continue with AJAX login if the email is valid
         $.ajax({
-            // FOR WEBPAGE
             url: "http://localhost/SDCAQrCode/index.php/Login",
-            // url: "http://192.168.120.124/SDCAQrCode/index.php/Login",
             method: "POST",
-            data: {
-                email: email,
-                password: password
-            },
+            data: { email, password },
             dataType: "json",
             success: function (data) { 
                 if (data.success) {
-                    // Store user session in localStorage (or sessionStorage)
-                    localStorage.setItem('user_id', data.data.id); // Store user ID
-                    localStorage.setItem('email', data.data.email); // Store username
-                    localStorage.setItem('logged_in', 'true'); // Mark the user as logged in
-    
+                    localStorage.setItem('user_id', data.data.id);
+                    localStorage.setItem('email', data.data.email);
+                    localStorage.setItem('logged_in', 'true');
+
                     setAlertMessage('Your account was signed in successfully.');
                     setShowAlert(true);
                     setTimeout(() => {
-                        history.push('/folder/home'); // Redirect to home page
+                        history.push('/folder/home');
                     }, 2000);
                 } else {
                     setAlertMessage('Login failed: ' + data.message);
@@ -72,59 +77,77 @@ const Login = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <div style={{ textAlign: 'center', color: 'red' }}>
-                        <IonTitle className="ion-text-center">Student Login</IonTitle>
-                    </div>
+                    <IonTitle className="ion-text-center" style={{ color: 'red' }}>Student Login</IonTitle>
                 </IonToolbar>
             </IonHeader>
+
             <IonContent className="ion-padding">
                 <IonCard className="login-card">
                     <IonCardHeader>
                         <IonCardTitle className="ion-text-center">Welcome Back!</IonCardTitle>
                     </IonCardHeader>
+
                     <IonCardContent>
-                        <IonItem>
-                            <IonIcon slot="start" icon={personCircleOutline} />
-                            <IonLabel position="floating">Email</IonLabel>
+                        {/* Email Input */}
+                        <IonItem className="align-items-center">
+                            <IonIcon slot="start" icon={personCircleOutline} className="input-icon" />
+                            <IonLabel position="stacked">Email</IonLabel>
                             <IonInput
+                                type='email'
                                 value={email}
-                                onIonChange={e => setEmail(e.detail.value!)}
-                                required
+                                onIonChange={(e) => setEmail(e.detail.value!)}
                                 className="ion-input-custom"
+                                required
                             />
                         </IonItem>
-                        <IonItem>
-                            <IonIcon slot="start" icon={lockClosedOutline} />
-                            <IonLabel position="floating">Password</IonLabel>
+
+                        {/* Password Input */}
+                        <IonItem className="align-items-center">
+                            <IonIcon slot="start" icon={lockClosedOutline} className="input-icon" />
+                            <IonLabel position="stacked">Password</IonLabel>
                             <IonInput
                                 type="password"
                                 value={password}
-                                onIonChange={e => setPassword(e.detail.value!)}
-                                required
+                                onIonChange={(e) => setPassword(e.detail.value!)}
                                 className="ion-input-custom"
+                                required
                             />
                         </IonItem>
 
-                        <IonButton expand="full" onClick={handleLogin} className="login-button">
-                            Login
-                        </IonButton>
+                        {/* Buttons */}
+                        <IonGrid>
+                            <IonRow className="ion-justify-content-center ion-align-items-center">
+                                <IonCol size="6" className="ion-text-center">
+                                    <IonButton
+                                        expand="block"
+                                        onClick={handleLogin}
+                                        className="login-button"
+                                        shape="round"
+                                    >
+                                        Login
+                                    </IonButton>
+                                </IonCol>
+                                <IonCol size="6" className="ion-text-center">
+                                    <IonButton
+                                        expand="block"
+                                        color="secondary"
+                                        onClick={handleAdminAction}
+                                        className="admin-button"
+                                        shape="round"
+                                    >
+                                        Admin Login
+                                    </IonButton>
+                                </IonCol>
+                            </IonRow>
+                        </IonGrid>
 
-                        <div>
-                            <IonButton
-                                expand="full"
-                                color="secondary"
-                                onClick={handleAdminAction}
-                                style={{ marginTop: '10px' }}
-                            >
-                                Admin Login
-                            </IonButton>
-                            <IonLabel style={{ color: 'black' }}>
-                                If you are an admin, please click the admin button
-                            </IonLabel>
-                        </div>
+                        <IonLabel className="admin-note">
+                            If you are an admin, please click the admin button
+                        </IonLabel>
                     </IonCardContent>
                 </IonCard>
 
+                {/* Alert Notification */}
                 <IonAlert
                     isOpen={showAlert}
                     onDidDismiss={() => setShowAlert(false)}

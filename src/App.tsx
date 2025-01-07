@@ -16,6 +16,7 @@ import Contact from './pages/Contact';
 import LoginAdmin from './pages/LoginAdmin';
 import Homes from './pages/Homes';
 import Scanner from './pages/Scanner';
+import Bookscanner from './pages/Bookscanner';
 
 
 // import QrCode from './pages/QrCode';
@@ -48,6 +49,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Booksearch from './pages/Booksearch';
+
 
 
 
@@ -107,7 +110,8 @@ const App: React.FC = () => {
             <LoginPage />
             
             </Route>
-            
+            <Route path="/folder/Bookscanner" component={Bookscanner} exact={true} />
+            <Route path="/folder/Booksearch" component={Booksearch} exact={true} />
             <Route path="/folder/Borrow2" component={Borrow2} exact={true} />
             
             

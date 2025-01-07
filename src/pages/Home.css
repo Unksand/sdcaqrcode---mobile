@@ -225,4 +225,6 @@ ion-header, ion-footer {
     color:#9f250a;
   }
   
-  
+  .Title {
+    text-align: center;
+  }

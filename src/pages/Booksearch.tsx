@@ -78,7 +78,7 @@ const Borrow2 = (props: RouteComponentProps) => {
       console.error('Error fetching borrowed books:', error);
     }
   };
-  
+
   // Handle search input change
   const handleSearchInput = (e: any) => {
     setSearchQuery(e.target.value);
@@ -175,7 +175,7 @@ const Borrow2 = (props: RouteComponentProps) => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Borrow a Book</IonTitle>
+          <IonTitle>Book Catalogue</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -308,21 +308,7 @@ const Borrow2 = (props: RouteComponentProps) => {
           </IonRow>
          
 
-          {/* Borrowed Books Section */}
-          <IonRow>
-            <IonCol size="12">
-              <h3>My Borrowed Books</h3>
-              <ul style={{ padding: 0, listStyle: 'none' }}>
-                {borrowedBooks.length > 0 ? (
-                  borrowedBooks.map((book) => (
-                    <li key={book.id}>{book.book_title} by {book.Author}</li>
-                  ))
-                ) : (
-                  <li>None</li>
-                )}
-              </ul>
-            </IonCol>
-          </IonRow>
+          
         </IonGrid>
       </IonContent>
     </IonPage>

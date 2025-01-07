@@ -74,8 +74,8 @@ const appPages: AppPage[] = [
     mdIcon: bookSharp,
   },
   {
-    title: 'Return',
-    url: '/folder/Return',
+    title: 'Book Catalogue',
+    url: '/folder/Booksearch',
     iosIcon: bookOutline,
     mdIcon: bookSharp,
   },
@@ -126,18 +126,18 @@ const Menu: React.FC = () => {
   }, []);
 
   // Function to toggle the menu on larger screens
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // const toggleMenu = () => {
+  //   setIsMenuOpen(!isMenuOpen);
+  // };
 
   return (
     <>
       {/* Button to toggle the menu on larger screens */}
-      {isMenuDisabled && (
+      {/* {isMenuDisabled && (
         <IonButton onClick={toggleMenu}  className="menu-toggle-button">
           <IonMenuButton/>  
         </IonButton>
-      )}
+      )} */}
 
       {/* IonMenu with the disabled prop */}
       <IonMenu contentId="main" type="overlay" swipeGesture={false} disabled={!isMenuOpen && isMenuDisabled}>
