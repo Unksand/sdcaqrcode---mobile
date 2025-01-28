@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './Borrow.css';
+import './Booksearch.css';
 import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonRow, IonCol, IonGrid, IonToolbar, IonSearchbar, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
 import { RouteComponentProps } from 'react-router-dom';
 import { DBR, TextResult } from 'capacitor-plugin-dynamsoft-barcode-reader';
@@ -218,21 +218,23 @@ const Borrow2 = (props: RouteComponentProps) => {
             </IonRow>
           ) : (
             booksToDisplay.length > 0 ? (
-              booksToDisplay.map((book) => (
-                <IonRow key={book.id}>
-                  <IonCol size="12">
-                    <IonItem>
-                      <IonLabel>
-                        <h3>{book.book_title || 'No title available'}</h3>
-                        <p>{book.Author || 'No author available'}</p>
-                      </IonLabel>
-                      <IonButton shape='round' fill="outline" slot="end" onClick={() => borrowBook(book.id)}>
-                        Borrow
-                      </IonButton>
-                    </IonItem>
-                  </IonCol>
+              <IonGrid className="book-grid">
+                <IonRow>
+                  {booksToDisplay.map((book) => (
+                    <IonCol size="12" size-sm="6" size-md="4" key={book.id} className="book-col">
+                      <IonItem className="book-item">
+                        <IonLabel>
+                          <h3>{book.book_title || 'No title available'}</h3>
+                          <p>{book.Author || 'No author available'}</p>
+                        </IonLabel>
+                        <IonButton shape='round' fill="outline" slot="end" onClick={() => borrowBook(book.id)}>
+                          Borrow
+                        </IonButton>
+                      </IonItem>
+                    </IonCol>
+                  ))}
                 </IonRow>
-              ))
+            </IonGrid>
             ) : (
               <IonRow>
                 <IonCol size="12">
@@ -245,7 +247,7 @@ const Borrow2 = (props: RouteComponentProps) => {
           )}
 
           {/* Toggle Expand/Shrink Button */}
-          {books.length > 7 && (
+          {books.length > 8 && (
             <IonRow>
               <IonCol size="6">
                 <IonButton shape='round' expand="full" onClick={() => setExpanded(!expanded)}>

@@ -64,14 +64,12 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonSplitPane contentId="main">
           
-          <Route path="/folder/LoginAdmin" exact>
-              <LoginAdmin />
-            </Route>
+          
             {/* <Route path="/folder/QrCode" exact>
               <QrCode />
             </Route> */}
           <Route path="/folder/Homes" component={Homes} exact={true} />
-         <Route path="/folder/Scanner" component={Scanner} exact={true} />
+         
          <Route exact path="/" render={() => <Redirect to="/folder/Home" />} />
           
           
@@ -108,11 +106,14 @@ const App: React.FC = () => {
             </Route>
             <Route path="/folder/LoginPage" exact>
             <LoginPage />
-            
+            </Route>
+            <Route path="/folder/LoginAdmin" exact>
+              <LoginAdmin />
             </Route>
             <Route path="/folder/Bookscanner" component={Bookscanner} exact={true} />
             <Route path="/folder/Booksearch" component={Booksearch} exact={true} />
             <Route path="/folder/Borrow2" component={Borrow2} exact={true} />
+            <Route path="/folder/Scanner" component={Scanner} exact={true} />
             
             
           </IonRouterOutlet>

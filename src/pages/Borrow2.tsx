@@ -218,21 +218,24 @@ const Borrow2 = (props: RouteComponentProps) => {
             </IonRow>
           ) : (
             booksToDisplay.length > 0 ? (
-              booksToDisplay.map((book) => (
-                <IonRow key={book.id}>
-                  <IonCol size="12">
-                    <IonItem>
-                      <IonLabel>
-                        <h3>{book.book_title || 'No title available'}</h3>
-                        <p>{book.Author || 'No author available'}</p>
-                      </IonLabel>
-                      <IonButton shape='round' fill="outline" slot="end" onClick={() => borrowBook(book.id)}>
-                        Borrow
-                      </IonButton>
-                    </IonItem>
-                  </IonCol>
+              <IonGrid>
+                <IonRow>
+                  {booksToDisplay.map((book) => (
+                    <IonCol size="6" size-md="4" key={book.id}>
+                      <IonItem>
+                        <IonLabel>
+                          <h3>{book.book_title || 'No title available'}</h3>
+                          <p>{book.Author || 'No author available'}</p>
+                        </IonLabel>
+                        <IonButton shape='round' fill="outline" slot="end" onClick={() => borrowBook(book.id)}>
+                          Borrow
+                        </IonButton>
+                      </IonItem>
+                    </IonCol>
+                  ))}
                 </IonRow>
-              ))
+              </IonGrid>
+            
             ) : (
               <IonRow>
                 <IonCol size="12">

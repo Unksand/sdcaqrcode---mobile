@@ -22,11 +22,35 @@ const AdminLogin = () => {
     const [adminEmail, setAdminEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // Handle admin login logic here
         console.log('Admin Email:', adminEmail);
         console.log('Password:', password);
+
         // Implement your authentication logic here
+        try {
+            const response = await fetch('https://your-api-endpoint.com/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: adminEmail,
+                    password: password,
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log('Login successful:', data);
+            // Handle successful login (e.g., redirect to admin dashboard)
+        } catch (error) {
+            console.error('Login failed:', error);
+            // Handle login failure (e.g., show error message)
+        }
     };
 
     return (
