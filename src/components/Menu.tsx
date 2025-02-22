@@ -56,18 +56,6 @@ const appPages: AppPage[] = [
     mdIcon: callSharp,
   },
   {
-    title: 'Services',
-    url: '/folder/services',
-    iosIcon: buildOutline,
-    mdIcon: buildSharp,
-  },
-  {
-    title: 'Government Services',
-    url: '/folder/Government',
-    iosIcon: businessOutline,
-    mdIcon: businessSharp,
-  },
-  {
     title: 'Borrow',
     url: '/folder/Borrow',
     iosIcon: bookOutline,
@@ -89,14 +77,14 @@ const Menu: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to control menu visibility on large screens
 
   // Get the user's email or username from localStorage
-  const userEmail = localStorage.getItem('email'); // You can store this as 'username' or 'email' based on your app
-
+  const userEmail = localStorage.getItem('EmailId'); // You can store this as 'username' or 'email' based on your app
+  const userName = localStorage.getItem('FullName');
   // Logout function
   const handleLogout = () => {
     // Clear session data
     localStorage.removeItem('user_id');
-    localStorage.removeItem('username');
-    localStorage.removeItem('email');
+    localStorage.removeItem('FullName');
+    localStorage.removeItem('EmailId');
     localStorage.removeItem('logged_in');
 
     // Redirect to login page
@@ -146,8 +134,8 @@ const Menu: React.FC = () => {
             <IonListHeader>Menu</IonListHeader>
 
             {/* Display the logged-in user's email */}
-            {userEmail ? (
-              <IonNote>Welcome, {userEmail}</IonNote>
+            {userName? (
+              <IonNote>Welcome, {userName}</IonNote>
             ) : (
               <IonNote>Welcome, Guest</IonNote>
             )}

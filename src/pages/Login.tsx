@@ -42,14 +42,15 @@ const Login = () => {
 
         // Continue with AJAX login if the email is valid
         $.ajax({
-            url: "http://localhost/SDCAQrCode/index.php/Login",
+            url: "http://localhost/login/StudentLogin",
             method: "POST",
-            data: { email, password },
+            data: { email, password,},
             dataType: "json",
             success: function (data) { 
                 if (data.success) {
                     localStorage.setItem('user_id', data.data.id);
-                    localStorage.setItem('email', data.data.email);
+                    localStorage.setItem('EmailId', data.data.EmailId);
+                    localStorage.setItem('FullName', data.data.FullName);
                     localStorage.setItem('logged_in', 'true');
 
                     setAlertMessage('Your account was signed in successfully.');
@@ -81,7 +82,7 @@ const Login = () => {
                 </IonToolbar>
             </IonHeader>
 
-            <IonContent className="ion-padding">
+            <IonContent className="ion-padding login-content">
                 <IonCard className="login-card">
                     <IonCardHeader>
                         <IonCardTitle className="ion-text-center">Welcome Back!</IonCardTitle>
@@ -129,7 +130,7 @@ const Login = () => {
                                 </IonCol>
                                 <IonCol size="6" className="ion-text-center">
                                     <IonButton
-                                        expand="block"
+                                        expand ="block"
                                         color="secondary"
                                         onClick={handleAdminAction}
                                         className="admin-button"

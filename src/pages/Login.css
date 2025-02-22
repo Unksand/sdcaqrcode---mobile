@@ -1,52 +1,104 @@
-.login-card {
-    margin: 30px;
+/* Global Styles */
+ion-header, ion-footer {
+    --background: #9f250a;
+  }
+  
+  .login-content {
+    background-image: linear-gradient(to bottom, #f9f9f9, #fff);
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+  }
+  
+  .login-card {
+    margin: 20px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.login-card ion-card-title {
-    font-size: 1.5em;
+    color: red;
+  }
+  
+  .login-card ion-card-title {
+    font-size: 2rem;
+    margin: 10px 0;
+    color: #ff0000;
     font-weight: bold;
-}
-
-
-
-/* ion-icon {
-    color: #007BFF; /* Change this color to match your theme */
-
-
-/* ion-button {
-    background-color: #007BFF; /* Change this color to match your theme */
-    /* color: white;
-    font-weight: bold;*/ 
-
-
-
-
-/* Align IonItem contents properly */
-
-
-/* Ensures proper spacing between icon and label */
-.ion-label {
+  }
+  
+  .login-card ion-label {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #555;
     margin-left: 8px;
-    font-size: 14px;
-}
-/* Align IonItem contents properly */
-.align-items-center {
-    
+    color: red;
+  }
+  
+  .login-card ion-input {
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+  }
+  
+  .login-card ion-button {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .login-button {
+    background-color: #fffcfb;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #9f250a;
+  }
+  
+  .admin-button {
+    background-color: #fff;
+    color: #ff3103;
+    font-weight: bold;
+    border: 1px solid #9f250a;
+  }
+  
+  .admin-note {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  /* Align IonItem contents properly */
+  .align-items-center {
     align-items: center;
-}
-
-/* Adjust the icon size and alignment */
-.input-icon {
+  }
+  
+  /* Adjust the icon size and alignment */
+  .input-icon {
     font-size: 20px; /* Set icon size */
     margin-bottom: 50px;
-}
-
-/* Input field styling */
-.ion-input-custom {
-    
-    margin-top: 5px;
-}
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .login-card {
+      margin: 10px;
+      padding: 10px;
+    }
+  
+    .login-card ion-card-title {
+      font-size: 1.5rem;
+    }
+  
+    .login-card ion-label {
+      font-size: 1rem;
+    }
+  
+    .login-card ion-input {
+      font-size: 1rem;
+    }
+  
+    .login-card ion-button {
+      font-size: 1rem;
+    }
+  }

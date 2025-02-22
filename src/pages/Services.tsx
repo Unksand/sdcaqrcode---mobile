@@ -26,94 +26,20 @@ import {
       <IonPage>
         {/* Header */}
         <IonHeader>
-          <IonToolbar className="navbar" color="danger">
-            <IonGrid>
-              <IonRow>
-                <IonCol>
-                  <IonButton fill="clear" routerLink="/folder/Welcome!">
-                    Home
-                  </IonButton>
-                </IonCol>
-                <IonCol>
-                  <IonButton fill="clear" routerLink="/folder/About">
-                    About Us
-                  </IonButton>
-                </IonCol>
-                <IonCol>
-                  <IonButton fill="clear" routerLink="/folder/Contact Us">
-                    Contact Us
-                  </IonButton>
-                </IonCol>
-                <IonCol>
-                  <IonButton
-                    fill="clear"
-                    onClick={() => setShowServicesDropdown(!showServicesDropdown)}
-                  >
-                    Services <IonIcon icon={chevronDownOutline} />
-                  </IonButton>
-                  {showServicesDropdown && (
-                    <IonPopover isOpen={showServicesDropdown}>
-                      <div className="dropdown-menu">
-                        <IonButton fill="clear" routerLink="/folder/Services">
-                          Our Services
-                        </IonButton>
-                        <IonButton fill="clear" routerLink="/services/borrow">
-                          Borrow & Return Books
-                        </IonButton>
-                        <IonButton fill="clear" routerLink="/services/e-journals">
-                          E-Journals
-                        </IonButton>
-                        <IonButton
-                          fill="clear"
-                          routerLink="/services/research-assistance"
-                        >
-                          Research Assistance
-                        </IonButton>
-                      </div>
-                    </IonPopover>
-                  )}
-                </IonCol>
-                <IonCol>
-                  <IonButton
-                    fill="clear"
-                    onClick={() => setShowGovDropdown(!showGovDropdown)}
-                  >
-                    Government Officers <IonIcon icon={chevronDownOutline} />
-                  </IonButton>
-                  {showGovDropdown && (
-                    <IonPopover isOpen={showGovDropdown}>
-                      <div className="dropdown-menu">
-                        <IonButton
-                          fill="clear"
-                          routerLink="/gov-officers/department1"
-                        >
-                          Department 1
-                        </IonButton>
-                        <IonButton
-                          fill="clear"
-                          routerLink="/gov-officers/department2"
-                        >
-                          Department 2
-                        </IonButton>
-                        <IonButton
-                          fill="clear"
-                          routerLink="/gov-officers/department3"
-                        >
-                          Department 3
-                        </IonButton>
-                      </div>
-                    </IonPopover>
-                  )}
-                </IonCol>
-              </IonRow>
-            </IonGrid>
+          <IonToolbar color="danger">
+            <IonButtons slot="start">
+              <IonMenuButton />
+              <IonTitle className="header-text">
+                      Services
+              </IonTitle>
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
   
         {/* Banner */}
         <div className="banner">
           <div className="banner-overlay">
-            <h1>ABOUT US</h1>
+            <h1>SERVICES</h1>
           </div>
         </div>
   
