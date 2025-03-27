@@ -17,6 +17,7 @@ import LoginAdmin from './pages/LoginAdmin';
 import Homes from './pages/Homes';
 import Scanner from './pages/Scanner';
 import Bookscanner from './pages/Bookscanner';
+import Profile from './pages/Profile';
 
 
 // import QrCode from './pages/QrCode';
@@ -109,6 +110,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/folder/LoginAdmin" exact>
               <LoginAdmin />
+            </Route>
+            <Route path="/folder/Profile" exact>
+              <Profile />
             </Route>
             <Route path="/folder/Bookscanner" component={Bookscanner} exact={true} />
             <Route path="/folder/Booksearch" component={Booksearch} exact={true} />

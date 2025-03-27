@@ -1,0 +1,100 @@
+/* Global Styles */
+ion-header, ion-footer {
+    --background: #9f250a;
+    --height: 64px !important; /* Adjust the height to your desired value */
+  }
+  
+  .banner {
+    background: url("https://stdominiccollege.edu.ph/images/DLRC%20COLLECTION/RESERVE.jpg") no-repeat center center;
+    background-size: cover;
+    height: 180px; /* Adjusted height for better visibility */
+    position: relative;
+  }
+  
+  .image-caption {
+    font-size: 2.5rem; /* Adjusted font size for better visibility */
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin: 0;
+  }
+  
+  .banner-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .banner-overlay h1 {
+    color: white;
+    font-size: 2.5rem; /* Adjusted font size for better visibility */
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin: 0;
+  }
+  
+  /* Layout Styles */
+  .about-layout {
+    display: flex;
+    flex-direction: column; /* Stack columns on mobile */
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .centered-content {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: c; /* Center vertically */
+    flex-direction: column; /* Stack content vertically */
+    padding: 20px; /* Add padding for spacing */
+  }
+  
+  .main-section {
+    padding: 15px; /* Added padding for better spacing */
+    background: rgb(255, 254, 254); /* Light background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 20px; /* Added margin for spacing between sections */
+  }
+  
+  .quote-section {
+    color: #c4290a; 
+    text-align: center; /* Center the quote text */
+  }
+  
+  .section-title {
+    color: #c4290a; 
+    margin-bottom: 15px;
+    font-size: 1.5rem; /* Increased font size for better visibility */
+    text-align: center; /* Center the section titles */
+  }
+
+  .section-subtitle{
+    color: #c4290a; 
+  }
+  
+  /* General Styling */
+  .about-content p {
+    font-size: 1.1rem;
+/* Increased font size for better readability */
+    line-height: 1.6; /* Improved line height for better readability */
+    color: #333;
+  }
+  
+  .header-text {
+    text-align: center;
+    color: #f9f9f9;
+    font-size: 1.5rem; /* Increased font size for better visibility */
+  }
+  
+  /* Responsive Styles */
+  @media (min-width: 768px) {
+    .about-layout {
+      flex-direction: row; /* Side by side layout for larger screens */
+    }
+  
+    .main-section {
+      flex: 1; /* Each section takes equal space */
+    }
+  }

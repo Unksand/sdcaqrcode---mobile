@@ -18,6 +18,8 @@ import {
     IonGrid,
     IonCol,
     IonRow,
+    IonMenuButton,
+    IonButtons,
 } from '@ionic/react';
 import { personCircleOutline, lockClosedOutline } from 'ionicons/icons';
 import './Login.css'; // Updated CSS file
@@ -77,8 +79,11 @@ const Login = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle className="ion-text-center" style={{ color: 'red' }}>Student Login</IonTitle>
+                <IonToolbar color ="danger">
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle className="ion-text-center">Login</IonTitle>
                 </IonToolbar>
             </IonHeader>
 

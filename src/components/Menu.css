@@ -1,64 +1,57 @@
 /* General Menu Styles */
 ion-menu ion-content {
-  --background: var(--ion-item-background, var(--ion-background-color, #ce222250)); /* Changed background color */
+  --background: #f8f0f0; /* Light background for better contrast */
 }
-
-
 
 /* List Styles */
 ion-menu.md ion-list {
-  padding: 25px 0; /* Adjusted padding */
+  padding: 20px 0; /* Adjusted padding */
 }
 
 ion-menu.md ion-note {
-  margin-bottom: 25px; /* Adjusted margin */
+  margin-bottom: 20px; /* Adjusted margin */
+  color: #555; /* Softer color for notes */
 }
 
 /* Header and Note Styles */
 ion-menu.md ion-list-header,
 ion-menu.md ion-note {
   padding-left: 15px; /* Adjusted padding */
-  color: var(--ion-color-dark); /* Changed header color */
+  color: #333; /* Darker color for better readability */
 }
 
 ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-color-primary, #007bff); /* Changed border color */
+  border-bottom: 1px solid #ff0000; /* Primary color for border */
 }
 
 ion-menu.md ion-list#inbox-list ion-list-header {
-  font-size: 24px; /* Adjusted font size */
-  font-weight: normal; /* Changed to normal (non-bold) */
-  min-height: 25px; /* Adjusted min height */
-}
-
-ion-menu.md ion-list#labels-list ion-list-header {
-  font-size: 18px; /* Adjusted font size */
-  margin-bottom: 20px; /* Adjusted margin */
-  color: #555; /* Changed color */
+  font-size: 26px; /* Increased font size for better visibility */
+  font-weight: bold; /* Bold for emphasis */
   min-height: 30px; /* Adjusted min height */
 }
 
 /* Item Styles */
 ion-menu.md ion-item {
-  --padding-start: 12px; /* Adjusted padding */
-  --padding-end: 12px; 
-  border-radius: 5px; /* Changed border radius */
+  --padding-start: 15px; /* Adjusted padding */
+  --padding-end: 15px; 
+  border-radius: 8px; /* Increased border radius for a softer look */
+  transition: background 0.3s; /* Smooth transition for hover effect */
 }
 
 ion-menu.md ion-item.selected {
-  --background: rgba(var(--ion-color-primary-rgb), 0.2); /* Changed selected background */
+  --background: rgba(0, 123, 255, 0.2); /* Lighter selected background */
 }
 
-ion-menu.md ion-item.selected ion-icon {
-  color: var(--ion-color-primary); /* Selected icon color */
+ion-menu.md ion-item:hover {
+  --background: rgba(0, 123, 255, 0.1); /* Subtle hover effect */
 }
 
 ion-menu.md ion-item ion-icon {
-  color: #4a4a4a; /* Changed icon color */
+  color: #ff0000; /* Primary color for icons */
 }
 
 ion-menu.md ion-item ion-label {
-  font-weight: normal; /* Changed to normal (non-bold) */
+  font-weight: normal; /* Normal weight for labels */
 }
 
 /* iOS Specific Styles */
@@ -67,46 +60,35 @@ ion-menu.ios ion-content {
 }
 
 ion-menu.ios ion-list {
-  padding: 25px 0 0 0; /* Adjusted padding */
+  padding: 20px 0; /* Adjusted padding */
 }
 
 ion-menu.ios ion-note {
-  line-height: 26px; /* Adjusted line height */
-  margin-bottom: 25px; /* Adjusted margin */
+  line-height: 28px; /* Adjusted line height */
+  margin-bottom: 20px; /* Adjusted margin */
 }
 
 ion-menu.ios ion-item {
-  --padding-start: 18px; /* Adjusted padding */
-  --padding-end: 18px; 
-  --min-height: 55px; /* Adjusted min height */
+  --padding-start: 20px; /* Adjusted padding */
+  --padding-end: 20px; 
+  --min-height: 60px; /* Adjusted min height */
 }
 
 ion-menu.ios ion-item ion-icon {
-  font-size: 26px; /* Adjusted icon size */
-  color: #b84d4d; /* Changed icon color */
+  font-size: 28px; /* Increased icon size */
+  color: #ff0404; /* Primary color for icons */
 }
 
 ion-menu.ios ion-item.selected ion-icon {
-  color: var(--ion-color-primary); /* Selected icon color */
-}
-
-ion-menu.ios ion-list#labels-list ion-list-header {
-  margin-bottom: 10px; /* Adjusted margin */
-}
-
-ion-menu.ios ion-list-header,
-ion-menu.ios ion-note {
-  padding-left: 18px; /* Adjusted padding */
-  padding-right: 18px; /* Adjusted padding */
+  color: #ff0d0d; /* Darker color for selected icon */
 }
 
 ion-note {
   display: inline-block;
   font-size: 16px; /* Font size */
-  color: var(--ion-color-medium-shade); /* Note color */
+  color: #666; /* Softer note color */
 }
 
 ion-item.selected {
-  --color: var(--ion-color-primary); /* Selected item color */
+  --color: #ff0000; /* Selected item color */
 }
-

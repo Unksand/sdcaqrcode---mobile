@@ -28,7 +28,7 @@ import {
   logoYoutube,
   globeOutline,
 } from "ionicons/icons"; // Import necessary icons
-import "./AboutPage.css";
+import "./Contact.css";
 
 const Contact: React.FC = () => {
   return (
@@ -51,33 +51,62 @@ const Contact: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <IonContent className="ion-padding about-content">
+      <IonContent className="ion-padding about-content centered-content">
         <IonGrid className="about-layout">
           <IonRow className="responsive-row">
             <IonCol size="12" sizeMd="6">
               <div className="main-section">
-                <h2 className="section-title">You can find us here</h2>
+                <h2 className="section-title">You can find us here:</h2>
                 <p>
-                  <IonIcon icon={locationSharp} /> Emilio Aguinaldo Highway, Bacoor City, Philippines 4102
+                  <IonIcon icon={locationSharp} /> Emilio Aguinaldo Highway,
+                  Bacoor City, Philippines 4102
                 </p>
                 <p>
-                  <IonIcon icon={callOutline} /> (+63) 998 551 8021
+                  <IonIcon icon={mailOpenSharp} />
+                  <a href="mailto:dlrchelpdesk@sdca.edu.ph" target="_blank">
+                    dlrchelpdesk@sdca.edu.ph
+                  </a>
                 </p>
                 <p>
-                  <IonIcon icon={mailOpenSharp} /> dlrchelpdesk@sdca.edu.ph
+                  <IonIcon icon={globeOutline} /> 
+                  Our social media platforms:
                 </p>
-                <IonRow style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-                  <a href="https://www.facebook.com/stdominiccollege/" target="_blank">
-                    <IonIcon icon={logoFacebook} style={{ fontSize: "3rem", color: "blue" }} />
+                <IonRow
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <a
+                    href="https://www.facebook.com/sdcaheudlrc"
+                    target="_blank"
+                  >
+                    <IonIcon
+                      icon={logoFacebook}
+                      style={{ fontSize: "3rem", color: "blue" }}
+                    />
                   </a>
                   <a href="https://www.instagram.com" target="_blank">
-                    <IonIcon icon={logoInstagram} style={{ fontSize: "3rem", color: "yellow" }} />
+                    <IonIcon
+                      icon={logoInstagram}
+                      style={{ fontSize: "3rem", color: "yellow" }}
+                    />
                   </a>
                   <a href="https://stdominiccollege.edu.ph/" target="_blank">
-                    <IonIcon icon={globeOutline} style={{ fontSize: "3rem", color: "black" }} />
+                    <IonIcon
+                      icon={globeOutline}
+                      style={{ fontSize: "3rem", color: "black" }}
+                    />
                   </a>
-                  <a href="https://www.youtube.com/@st.dominiccollegeofasia1851/featured" target="_blank">
-                    <IonIcon icon={logoYoutube} style={{ fontSize: "3rem", color: "red" }} />
+                  <a
+                    href="https://www.youtube.com/@st.dominiccollegeofasia1851/featured"
+                    target="_blank"
+                  >
+                    <IonIcon
+                      icon={logoYoutube}
+                      style={{ fontSize: "3rem", color: "red" }}
+                    />
                   </a>
                 </IonRow>
               </div>
@@ -87,13 +116,10 @@ const Contact: React.FC = () => {
               <div className="main-section">
                 <h2 className="section-title">Working Hours</h2>
                 <p>
-                  <IonIcon icon={timeSharp} /> Monday-Friday: 8 AM - 7 PM
+                  <IonIcon icon={timeSharp} /> MONDAY AND SATURDAY: 8:00 AM - 5:00 PM
                 </p>
                 <p>
-                  <IonIcon icon={timeSharp} /> Saturday: 8 AM - 4 PM
-                </p>
-                <p>
-                  <IonIcon icon={timeSharp} /> Sunday: Closed
+                  <IonIcon icon={timeSharp} /> TUESDAY TO FRIDAY: 7:00 AM - 7:00 PM
                 </p>
               </div>
             </IonCol>

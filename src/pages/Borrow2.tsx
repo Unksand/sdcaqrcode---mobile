@@ -29,7 +29,7 @@ const Borrow2 = (props: RouteComponentProps) => {
       console.log('Fetching books with query:', searchQuery);
       
       // Send the query and 'is_borrowed=0' to fetch only available books
-      const response = await fetch(`http://localhost/SDCAQrCode/index.php/Booksload/search_books?query=${searchQuery}&is_borrowed=0`, {
+      const response = await fetch(`http://localhost/login/index.php/Booksload/search_books?query=${searchQuery}&is_borrowed=0`, {
         method: 'GET',
       });
       const data = await response.json();
@@ -45,7 +45,7 @@ const Borrow2 = (props: RouteComponentProps) => {
   const borrowBook = async (bookId: number) => {
     try {
       console.log('Attempting to borrow book with ID:', bookId);
-      const response = await fetch(`http://localhost/SDCAQrCode/index.php/Booksload/borrow_book/${bookId}`, {
+      const response = await fetch(`http://localhost/login/index.php/Booksload/borrow_book/${bookId}`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const Borrow2 = (props: RouteComponentProps) => {
   const fetchBorrowedBooks = async () => {
     try {
       console.log('Fetching borrowed books...');
-      const response = await fetch('http://localhost/SDCAQrCode/index.php/Booksload/borrowed_bookss', {
+      const response = await fetch('http://localhost/login/index.php/Booksload/borrowed_bookss', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ const Borrow2 = (props: RouteComponentProps) => {
       initLicenseTried.current = true;
       const initLicense = async () => {
         try {
-          await DBR.initLicense({ license: "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNTU4MjUzLVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM1NTgyNTMiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOi0zMDU0MTgxMTF9" });
+          await DBR.initLicense({ license: "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNDM2OTU1LVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM0MzY5NTUiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOjI5NjAwNDU0NX0=" });
           setLicenseInitialized(true);
         } catch (error) {
           alert(error);
@@ -149,7 +149,7 @@ const Borrow2 = (props: RouteComponentProps) => {
   const fetchBookByQRCode = async (qrcode: string) => {
     try {
       console.log('Fetching book data for QR code:', qrcode);
-      const response = await fetch(`http://localhost/SDCAQrCode/index.php/Booksload/get_book_by_qrcode?qrcode=${qrcode}`, {
+      const response = await fetch(`http://localhost/login/index.php/Booksload/get_book_by_qrcode?qrcode=${qrcode}`, {
         method: 'GET',
       });
       const data = await response.json();

@@ -1,0 +1,89 @@
+/* General Styling */
+.borrow-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height */
+    background: linear-gradient(to bottom, #ff4d4d, #cc0000);
+    color: rgb(249, 249, 249);
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  /* Card Style */
+  .borrow-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  /* Icon */
+  .borrow-icon {
+    font-size: 6rem;
+    color: rgb(255, 0, 0);
+    margin-bottom: 20px;
+  }
+  
+  /* Title */
+  .borrow-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(255, 0, 0);
+    margin-bottom: 15px;
+  }
+  
+  /* Paragraph */
+  .borrow-card p {
+    font-size: 1.2rem;
+    color: rgb(50, 50, 50);
+    max-width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Button */
+  .login-btn {
+    width: 200px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 30px;
+    background: #cc0000;
+    color: white;
+  }
+  
+  .login-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 500px) {
+    .borrow-title {
+      font-size: 1.6rem;
+    }
+  
+    .borrow-icon {
+      font-size: 5rem;
+    }
+  
+    .borrow-card p {
+      font-size: 1rem;
+    }
+  
+    .login-btn {
+      width: 180px;
+      font-size: 1rem;
+    }
+  }
+  

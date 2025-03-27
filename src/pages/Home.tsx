@@ -43,16 +43,16 @@ const Home: React.FC = () => {
     // Log the session data to the console
     console.log("Checking session data on Home page...");
     console.log("Logged in status:", localStorage.getItem("logged_in"));
-    console.log("User     ID:", localStorage.getItem("user_id"));
-    console.log("Username:", localStorage.getItem("FullName"));
+    console.log("User      ID:", localStorage.getItem("user_id"));
+    console.log("Username:", localStorage.getItem("email"));
 
     // Check if the user is logged in by verifying session data in localStorage
     if (!localStorage.getItem("logged_in")) {
       // If no session data, redirect to login page
-      console.log("User     is not logged in. Redirecting to login page...");
+      console.log("User      is not logged in. Redirecting to login page...");
       history.push("/folder/home");
     } else {
-      console.log("User     is logged in. Showing home page content...");
+      console.log("User      is logged in. Showing home page content...");
     }
   }, [history]);
 
@@ -73,24 +73,6 @@ const Home: React.FC = () => {
           <IonTitle className="header-text">Home</IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      {/* Navigation Bar */}
-      <IonToolbar color="danger">
-        <IonNav>
-          <IonTabs>
-            <IonTabBar slot="bottom">
-              <IonTabButton tab="tab1" href="#tab1">
-                <IonIcon icon={libraryOutline} />
-                <span>Services</span>
-              </IonTabButton>
-              <IonTabButton tab="tab2" href="#tab2">
-                <IonIcon icon={phonePortraitOutline} />
-                <span>Contact Us</span>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </IonNav>
-      </IonToolbar>
 
       {/* Content */}
       <IonContent className="ion-padding">
@@ -123,7 +105,7 @@ const Home: React.FC = () => {
 
         <IonGrid>
           <IonRow>
-            <IonCol size="6">
+            <IonCol size="6" sizeMd="4" sizeLg="3">
               <IonButton
                 fill="outline"
                 routerLink="/folder/Borrow"
@@ -133,7 +115,7 @@ const Home: React.FC = () => {
                 Borrow Books
               </IonButton>
             </IonCol>
-            <IonCol size="6">
+            <IonCol size="6" sizeMd="4" sizeLg="3">
               <IonButton
                 fill="outline"
                 routerLink="/folder/Booksearch"
@@ -149,7 +131,7 @@ const Home: React.FC = () => {
         <div className="footer-content">
           <IonGrid>
             <IonRow>
-              <IonCol size="5">
+              <IonCol size="5" sizeMd="4" sizeLg="3">
                 <p>
                   <IonIcon icon={locationSharp} /> Emilio Aguinaldo Highway,
                   Bacoor City, Philippines 4102
@@ -161,7 +143,7 @@ const Home: React.FC = () => {
                   <IonIcon icon={mailSharp} /> dlrchelpdesk@sdca.edu.ph
                 </p>
               </IonCol>
-              <IonCol size="4">
+              <IonCol size="4" sizeMd="4" sizeLg="3">
                 <p>
                   <IonIcon icon={timeSharp} /> Monday-Friday: 8 AM - 7 PM
                 </p>
@@ -176,7 +158,12 @@ const Home: React.FC = () => {
           </IonGrid>
 
           <IonRow
-            style={{ display: "flex", justifyContent: "center", gap: "10px" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "10px",
+              flexWrap: "wrap",
+            }}
           >
             <a
               onClick={() =>

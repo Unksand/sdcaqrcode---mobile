@@ -1,76 +1,75 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
-  IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
+  IonHeader,
   IonToolbar,
-  IonText,
+  IonTitle,
+  IonContent,
   IonButtons,
   IonMenuButton,
   IonButton,
-} from '@ionic/react';
-import { useHistory } from 'react-router-dom';
+  IonIcon,
+  IonText,
+} from "@ionic/react";
+import { libraryOutline, logInOutline } from "ionicons/icons";
+import { useHistory } from "react-router-dom";
+import "./Borrow.css";
 
 const Borrow: React.FC = () => {
   const history = useHistory();
 
-  // Function to check login status
   const checkLoginStatus = () => {
-    const loggedIn = localStorage.getItem('logged_in');
-    if (loggedIn === 'true') {
-      // If user is logged in, reload the page to initiate the other function
-      if (history.location.pathname !== '/folder/Borrow2') {
-        history.replace('/folder/Borrow2');
-        // Reload the page after navigation
+    const loggedIn = localStorage.getItem("logged_in");
+    if (loggedIn === "true") {
+      if (history.location.pathname !== "/folder/Borrow2") {
+        history.replace("/folder/Borrow2");
         window.location.reload();
       }
     }
   };
 
-  // Monitor history changes with useEffect
   useEffect(() => {
     checkLoginStatus();
-
-    // React to changes in history
     const unlisten = history.listen(() => {
       checkLoginStatus();
     });
-
     return () => {
       unlisten();
     };
   }, [history]);
 
   const handleLoginRedirect = () => {
-    history.push('/folder/LoginPage');
+    history.push("/folder/LoginPage");
   };
 
   return (
     <IonPage>
+      {/* Header */}
       <IonHeader>
-        <IonToolbar style={{ color: 'danger' }}>
+        <IonToolbar color="danger">
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Borrow the Book</IonTitle>
+          <IonTitle className="header-text">Borrow Book</IonTitle>
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Borrow the Book</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent className="ion-padding">
+      {/* Content */}
+      <IonContent className="ion-padding borrow-content">
+        <div className="borrow-card">
+          <IonIcon icon={libraryOutline} className="borrow-icon" />
+          <h2 className="borrow-title">Borrow a Book</h2>
           <IonText>
-            <h2>You need to Login to Borrow the Book</h2>
+            <p>You need to log in to borrow a book.</p>
           </IonText>
-          <IonButton expand="full" onClick={handleLoginRedirect}>
-            Go to Login
+          <IonButton
+            expand="full"
+            onClick={handleLoginRedirect}
+            className="login-btn"
+          >
+            <IonIcon icon={logInOutline} slot="start" /> Go to Login
           </IonButton>
-        </IonContent>
+        </div>
       </IonContent>
     </IonPage>
   );

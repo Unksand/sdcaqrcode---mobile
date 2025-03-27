@@ -52,14 +52,14 @@ ion-header, ion-footer {
     background-color: #fffcfb;
     color: #fff;
     font-weight: bold;
-    border: 1px solid #9f250a;
+    border: 1px solid #ffffff;
   }
   
   .admin-button {
     background-color: #fff;
-    color: #ff3103;
+    color: #ffffff;
     font-weight: bold;
-    border: 1px solid #9f250a;
+    border: 1px solid #ffffff;
   }
   
   .admin-note {
