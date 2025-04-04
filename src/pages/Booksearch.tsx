@@ -379,7 +379,7 @@ const Booksearch = (props: RouteComponentProps) => {
                   <IonItem>
                     <IonLabel>
                       <h4>{qrData.BookName}</h4>
-                      <p>{qrData.AuthorId}</p>
+                      <p>{qrData.AuthorName}</p>
                     </IonLabel>
                   </IonItem>
                 </IonCol>
