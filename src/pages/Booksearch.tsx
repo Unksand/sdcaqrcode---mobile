@@ -24,8 +24,9 @@ import { enter, arrowUpCircleOutline } from "ionicons/icons";
 
 interface Book {
   id: number;
-  book_title: string;
-  Author: string;
+  BookName: string;
+  AuthorId: string;
+  AuthorName: string;
 }
 
 const Booksearch = (props: RouteComponentProps) => {
@@ -287,9 +288,13 @@ const Booksearch = (props: RouteComponentProps) => {
                       className="book-col"
                     >
                       <IonItem className="book-item">
+                        
                         <IonLabel>
-                          <h3>{book.book_title || "No title available"}</h3>
-                          <p>{book.Author || "No author available"}</p>
+                          <IonIcon>
+
+                          </IonIcon>
+                          <h3>{book.BookName || "No title available"}</h3>
+                          <p>{book.AuthorName || "No author available"}</p>
                         </IonLabel>
                         <IonButton
                           shape="round"
@@ -373,8 +378,8 @@ const Booksearch = (props: RouteComponentProps) => {
                   <h3>Book Details from Scanned QR Code</h3>
                   <IonItem>
                     <IonLabel>
-                      <h4>{qrData.book_title}</h4>
-                      <p>{qrData.Author}</p>
+                      <h4>{qrData.BookName}</h4>
+                      <p>{qrData.AuthorId}</p>
                     </IonLabel>
                   </IonItem>
                 </IonCol>
