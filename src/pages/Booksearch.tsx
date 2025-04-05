@@ -17,6 +17,7 @@ import {
   IonTitle,
   IonFab,
   IonIcon,
+  IonImg,
 } from "@ionic/react";
 import { RouteComponentProps } from "react-router-dom";
 import { DBR, TextResult } from "capacitor-plugin-dynamsoft-barcode-reader";
@@ -27,6 +28,8 @@ interface Book {
   BookName: string;
   AuthorId: string;
   AuthorName: string;
+  bookImage: string;
+  
 }
 
 const Booksearch = (props: RouteComponentProps) => {
@@ -288,11 +291,15 @@ const Booksearch = (props: RouteComponentProps) => {
                       className="book-col"
                     >
                       <IonItem className="book-item">
-                        
-                        <IonLabel>
-                          <IonIcon>
-
-                          </IonIcon>
+                        <IonImg
+                          src={`http://localhost/login/assets/bookimg/${book.bookImage}`}
+                          alt="Book Cover"
+                          class="book-cover"
+                          style={{ width: "45%" }}
+                          
+                        />
+                        <IonLabel style={{ marginLeft: "20px" }}>
+                          
                           <h3>{book.BookName || "No title available"}</h3>
                           <p>{book.AuthorName || "No author available"}</p>
                         </IonLabel>
@@ -339,34 +346,8 @@ const Booksearch = (props: RouteComponentProps) => {
           <div className="book-grid">
             <IonRow>
               <IonCol size="15">
-                <h3>Scanned QR Codes</h3>
-                <ul style={{ padding: 0, listStyle: "none" }}>
-                  {scannedQRs.length > 0 ? (
-                    scannedQRs.map((qr, index) => (
-                      <li
-                        key={index}
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        <span>{qr}</span>
-                        <IonButton
-                          shape="round"
-                          color="danger"
-                          fill="clear"
-                          size="small"
-                          onClick={() => removeScannedQR(index)}
-                        >
-                          Remove
-                        </IonButton>
-                      </li>
-                    ))
-                  ) : (
-                    <li>No QR codes scanned yet</li>
-                  )}
-                </ul>
+                <h3>QR Code Reader</h3>
+                
               </IonCol>
             </IonRow>
           </div>
@@ -377,7 +358,13 @@ const Booksearch = (props: RouteComponentProps) => {
                 <IonCol size="12">
                   <h3>Book Details from Scanned QR Code</h3>
                   <IonItem>
-                    <IonLabel>
+                    <IonImg 
+                      src={`${qrData.bookImage}`} 
+                      alt="Book Cover" 
+                      class="book-cover"
+                      style={{ width: "45%" }}
+                    />
+                    <IonLabel style={{ marginLeft: "20px" }}>
                       <h4>{qrData.BookName}</h4>
                       <p>{qrData.AuthorName}</p>
                     </IonLabel>
@@ -386,6 +373,8 @@ const Booksearch = (props: RouteComponentProps) => {
               </IonRow>
             )}
           </div>
+
+
 
           <div className="book-grid">
             <IonRow>
