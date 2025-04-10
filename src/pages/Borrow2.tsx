@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Borrow.css';
-import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonRow, IonCol, IonGrid, IonToolbar, IonSearchbar, IonPage, IonButtons, IonMenuButton, IonTitle } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonRow, IonCol, IonGrid, IonToolbar, IonSearchbar, IonPage, IonButtons, IonMenuButton, IonTitle, IonImg } from '@ionic/react';
 import { RouteComponentProps } from 'react-router-dom';
 import { DBR, TextResult } from 'capacitor-plugin-dynamsoft-barcode-reader';
 import { enter } from 'ionicons/icons';
 
 interface Book {
   id: number;
-  book_title: string;
-  Author: string;
+  BookName: string;
+  AuthorId: string;
+  AuthorName: string;
+  bookImage: string;
 }
 
 const Borrow2 = (props: RouteComponentProps) => {
@@ -221,13 +223,26 @@ const Borrow2 = (props: RouteComponentProps) => {
               <IonGrid>
                 <IonRow>
                   {booksToDisplay.map((book) => (
-                    <IonCol size="6" size-md="4" key={book.id}>
+                    <IonCol size="12" size-md="4" key={book.id}>
                       <IonItem>
-                        <IonLabel>
-                          <h3>{book.book_title || 'No title available'}</h3>
-                          <p>{book.Author || 'No author available'}</p>
+                        <IonImg
+                          src={`http://localhost/login/assets/bookimg/${book.bookImage}`}
+                          alt="Book Cover"
+                          class="book-cover"
+                          style={{ width: "45%" }}
+                          
+                        />
+                        <IonLabel style={{ marginLeft: "20px" }}>
+                          
+                          <h3>{book.BookName || "No title available"}</h3>
+                          <p>{book.AuthorName || "No author available"}</p>
                         </IonLabel>
-                        <IonButton shape='round' fill="outline" slot="end" onClick={() => borrowBook(book.id)}>
+                        <IonButton
+                          shape="round"
+                          fill="outline"
+                          slot="end"
+                          onClick={() => borrowBook(book.id)}
+                        >
                           Borrow
                         </IonButton>
                       </IonItem>
@@ -291,9 +306,15 @@ const Borrow2 = (props: RouteComponentProps) => {
               <IonCol size="12">
                 <h3>Book Details from Scanned QR Code</h3>
                 <IonItem>
-                  <IonLabel>
-                    <h4>{qrData.book_title}</h4>
-                    <p>{qrData.Author}</p>
+                  <IonImg 
+                    src={`${qrData.bookImage}`} 
+                    alt="Book Cover" 
+                    class="book-cover"
+                    style={{ width: "45%" }}
+                  />
+                  <IonLabel style={{ marginLeft: "20px" }}>
+                    <h4>{qrData.BookName}</h4>
+                    <p>{qrData.AuthorName}</p>
                   </IonLabel>
                 </IonItem>
               </IonCol>

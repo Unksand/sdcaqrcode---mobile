@@ -72,9 +72,10 @@ const Login = () => {
         });
     };
 
-    const handleAdminAction = () => {
-        console.log('Admin button clicked');
-    };
+    const handleAdminAction = (): void => {
+        // Redirect to Login Admin page
+        history.push('/folder/LoginAdmin');
+    }
 
     return (
         <IonPage>
