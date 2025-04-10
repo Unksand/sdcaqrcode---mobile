@@ -18,6 +18,7 @@ import Homes from './pages/Homes';
 import Scanner from './pages/Scanner';
 import Bookscanner from './pages/Bookscanner';
 import Profile from './pages/Profile';
+import Return2 from './pages/Return2';
 
 
 // import QrCode from './pages/QrCode';
@@ -118,6 +119,7 @@ const App: React.FC = () => {
             <Route path="/folder/Booksearch" component={Booksearch} exact={true} />
             <Route path="/folder/Borrow2" component={Borrow2} exact={true} />
             <Route path="/folder/Scanner" component={Scanner} exact={true} />
+            <Route path="/folder/Return2" component={Return2} exact={true} />
             
             
           </IonRouterOutlet>

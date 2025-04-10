@@ -128,7 +128,7 @@ const Booksearch = (props: RouteComponentProps) => {
         try {
           await DBR.initLicense({
             license:
-              "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNDM2OTU1LVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM0MzY5NTUiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOjI5NjAwNDU0NX0=",
+              "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNTU4MjUzLVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM1NTgyNTMiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOi0zMDU0MTgxMTF9",
           });
           setLicenseInitialized(true);
         } catch (error) {
@@ -303,14 +303,7 @@ const Booksearch = (props: RouteComponentProps) => {
                           <h3>{book.BookName || "No title available"}</h3>
                           <p>{book.AuthorName || "No author available"}</p>
                         </IonLabel>
-                        <IonButton
-                          shape="round"
-                          fill="outline"
-                          slot="end"
-                          onClick={() => borrowBook(book.id)}
-                        >
-                          Borrow
-                        </IonButton>
+                        
                       </IonItem>
                     </IonCol>
                   ))}

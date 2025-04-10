@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Borrow.css';
-import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonRow, IonCol, IonGrid, IonToolbar, IonSearchbar, IonPage, IonButtons, IonMenuButton, IonTitle, IonImg } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonRow, IonCol, IonGrid, IonToolbar, IonSearchbar, IonPage, IonButtons, IonMenuButton, IonTitle, IonImg, IonAlert } from '@ionic/react';
 import { RouteComponentProps } from 'react-router-dom';
 import { DBR, TextResult } from 'capacitor-plugin-dynamsoft-barcode-reader';
 import { enter } from 'ionicons/icons';
@@ -14,6 +14,8 @@ interface Book {
 }
 
 const Borrow2 = (props: RouteComponentProps) => {
+  const [showAlert, setShowAlert] = useState(false); // State to control the alert visibility
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null); // State to store the selected book
   const [searchQuery, setSearchQuery] = useState(""); // State for the search query
   const [books, setBooks] = useState<Book[]>([]); // State for the list of books
   const [borrowedBooks, setBorrowedBooks] = useState([]); // State for borrowed books
@@ -92,7 +94,7 @@ const Borrow2 = (props: RouteComponentProps) => {
       initLicenseTried.current = true;
       const initLicense = async () => {
         try {
-          await DBR.initLicense({ license: "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNDM2OTU1LVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM0MzY5NTUiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOjI5NjAwNDU0NX0=" });
+          await DBR.initLicense({ license: "DLS2eyJoYW5kc2hha2VDb2RlIjoiMTAzNTU4MjUzLVRYbFFjbTlxIiwibWFpblNlcnZlclVSTCI6Imh0dHBzOi8vbWRscy5keW5hbXNvZnRvbmxpbmUuY29tIiwib3JnYW5pemF0aW9uSUQiOiIxMDM1NTgyNTMiLCJzdGFuZGJ5U2VydmVyVVJMIjoiaHR0cHM6Ly9zZGxzLmR5bmFtc29mdG9ubGluZS5jb20iLCJjaGVja0NvZGUiOi0zMDU0MTgxMTF9" });
           setLicenseInitialized(true);
         } catch (error) {
           alert(error);
@@ -241,7 +243,10 @@ const Borrow2 = (props: RouteComponentProps) => {
                           shape="round"
                           fill="outline"
                           slot="end"
-                          onClick={() => borrowBook(book.id)}
+                          onClick={() => {
+                            setSelectedBook(book); // Set the selected book
+                            setShowAlert(true); // Show the alert
+                          }}
                         >
                           Borrow
                         </IonButton>
@@ -281,7 +286,7 @@ const Borrow2 = (props: RouteComponentProps) => {
                 {scannedQRs.length > 0 ? (
                   scannedQRs.map((qr, index) => (
                     <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span>{qr}</span> {/* Display the QR text */}
+                      
                       <IonButton
                         shape='round'
                         color="danger"
@@ -316,6 +321,17 @@ const Borrow2 = (props: RouteComponentProps) => {
                     <h4>{qrData.BookName}</h4>
                     <p>{qrData.AuthorName}</p>
                   </IonLabel>
+                  <IonButton
+                          shape="round"
+                          fill="outline"
+                          slot="end"
+                          onClick={() => {
+                            setSelectedBook(qrData.BookName); // Set the selected book
+                            setShowAlert(true); // Show the alert
+                          }}
+                        >
+                          Borrow
+                        </IonButton>
                 </IonItem>
               </IonCol>
             </IonRow>
@@ -349,7 +365,32 @@ const Borrow2 = (props: RouteComponentProps) => {
           </IonRow>
         </IonGrid>
       </IonContent>
+      {/* IonAlert for confirmation */}
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)} // Close the alert when dismissed
+        header="Confirm Borrow"
+        message={`Are you sure you want to borrow "${selectedBook?.BookName}"?`}
+        buttons={[
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Borrow canceled');
+            },
+          },
+          {
+            text: 'Confirm',
+            handler: () => {
+              if (selectedBook) {
+                borrowBook(selectedBook.id); // Call borrowBook with the selected book's ID
+              }
+            },
+          },
+        ]}
+      />
     </IonPage>
+
   );
 };
 
