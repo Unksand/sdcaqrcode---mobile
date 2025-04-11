@@ -43,16 +43,16 @@ const Home: React.FC = () => {
     // Log the session data to the console
     console.log("Checking session data on Home page...");
     console.log("Logged in status:", localStorage.getItem("logged_in"));
-    console.log("User      ID:", localStorage.getItem("user_id"));
-    console.log("Username:", localStorage.getItem("email"));
+    console.log("Student ID:", localStorage.getItem("StudentId"));  
+    console.log("Username:", localStorage.getItem("EmailId"));
 
     // Check if the user is logged in by verifying session data in localStorage
     if (!localStorage.getItem("logged_in")) {
       // If no session data, redirect to login page
-      console.log("User      is not logged in. Redirecting to login page...");
+      console.log("User is not logged in. Redirecting to login page...");
       history.push("/folder/home");
     } else {
-      console.log("User      is logged in. Showing home page content...");
+      console.log("User ",localStorage.getItem("FullName"),"is logged in. Showing home page content...");
     }
   }, [history]);
 

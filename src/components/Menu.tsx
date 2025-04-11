@@ -94,7 +94,7 @@ const Menu: React.FC = () => {
   // Logout function
   const handleLogout = () => {
     // Clear session data
-    localStorage.removeItem("user_id");
+    localStorage.removeItem("StudentId");
     localStorage.removeItem("FullName");
     localStorage.removeItem("EmailId");
     localStorage.removeItem("logged_in");

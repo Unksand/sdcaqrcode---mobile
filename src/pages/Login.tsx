@@ -50,7 +50,7 @@ const Login = () => {
             dataType: "json",
             success: function (data) { 
                 if (data.success) {
-                    localStorage.setItem('user_id', data.data.id);
+                    localStorage.setItem('StudentId', data.data.StudentId);
                     localStorage.setItem('EmailId', data.data.EmailId);
                     localStorage.setItem('FullName', data.data.FullName);
                     localStorage.setItem('logged_in', 'true');
